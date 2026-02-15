@@ -22,7 +22,7 @@ export default function Nav() {
             href="/write"
             className="font-nav text-sm tracking-wide text-coffee hover:text-espresso transition-colors"
           >
-            Write a Note
+            Write an Entry
           </Link>
           <Link
             href="/about"
@@ -81,7 +81,7 @@ export default function Nav() {
             onClick={() => setOpen(false)}
             className="font-nav text-sm text-coffee hover:text-espresso transition-colors"
           >
-            Write a Note
+            Write an Entry
           </Link>
           <Link
             href="/about"
