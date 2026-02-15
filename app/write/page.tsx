@@ -1,20 +1,88 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { MODES } from "@/lib/modes";
 
 type FormState = "writing" | "redirect" | "submitting" | "thankyou";
 
-const FONT_OPTIONS = [
-  { value: "surprise", label: "Surprise me" },
-  { value: "permanent-marker", label: "Permanent Marker" },
-  { value: "reenie-beanie", label: "Reenie Beanie" },
-  { value: "nothing-you-could-do", label: "Nothing You Could Do" },
-  { value: "covered-by-your-grace", label: "Covered By Your Grace" },
-  { value: "allura", label: "Allura" },
-  { value: "courier-new", label: "Courier New" },
+const VIBE_OPTIONS = [
+  { value: "surprise", label: "Surprise me", fontClass: "font-nav" },
+  { value: "permanent-marker", label: "Bold", fontClass: "font-hand-permanent-marker" },
+  { value: "reenie-beanie", label: "Messy", fontClass: "font-hand-reenie-beanie" },
+  { value: "nothing-you-could-do", label: "Reflective", fontClass: "font-hand-nothing-you-could-do" },
+  { value: "covered-by-your-grace", label: "Soft", fontClass: "font-hand-covered-by-your-grace" },
+  { value: "allura", label: "Tender", fontClass: "font-hand-allura" },
+  { value: "courier-new", label: "Matter-of-fact", fontClass: "font-hand-courier-new" },
 ];
+
+function VibeDropdown({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const selected = VIBE_OPTIONS.find((v) => v.value === value) || VIBE_OPTIONS[0];
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full p-3 text-left bg-white border border-blush rounded-sm focus:outline-none focus:border-espresso flex items-center justify-between"
+      >
+        <span className={`${selected.fontClass} text-lg text-espresso`}>
+          {selected.label}
+        </span>
+        <svg
+          className={`w-4 h-4 text-coffee transition-transform ${open ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute z-50 w-full mt-1 bg-white border border-blush rounded-sm shadow-md max-h-72 overflow-y-auto">
+          {VIBE_OPTIONS.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => {
+                onChange(option.value);
+                setOpen(false);
+              }}
+              className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
+                option.value === value ? "bg-gray-50" : ""
+              }`}
+            >
+              <span className={`${option.fontClass} text-lg text-espresso`}>
+                {option.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function WritePage() {
   const [text, setText] = useState("");
@@ -23,6 +91,9 @@ export default function WritePage() {
   const [agreed, setAgreed] = useState(false);
   const [formState, setFormState] = useState<FormState>("writing");
   const [formError, setFormError] = useState<string | null>(null);
+
+  const selectedVibe = VIBE_OPTIONS.find((v) => v.value === fontFamily) || VIBE_OPTIONS[0];
+  const textareaFontClass = fontFamily === "surprise" ? "font-hand" : selectedVibe.fontClass;
 
   const handleSubmit = async () => {
     setFormError(null);
@@ -142,7 +213,7 @@ export default function WritePage() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Start writing..."
-          className="w-full min-h-[180px] p-5 font-hand text-xl text-espresso bg-white border border-blush rounded-sm resize-none focus:outline-none focus:border-espresso placeholder:text-softbrown"
+          className={`w-full min-h-[180px] p-5 ${textareaFontClass} text-xl text-espresso bg-white border border-blush rounded-sm resize-none focus:outline-none focus:border-espresso placeholder:text-softbrown`}
         />
         <p className="font-nav text-xs text-softbrown mt-1.5 text-right">
           {text.length} / 50 minimum
@@ -168,19 +239,9 @@ export default function WritePage() {
 
         <div className="mt-6">
           <label className="font-nav text-sm text-coffee block mb-2">
-            Choose your font (optional)
+            Choose a vibe (optional)
           </label>
-          <select
-            value={fontFamily}
-            onChange={(e) => setFontFamily(e.target.value)}
-            className="w-full p-3 font-nav text-sm text-espresso bg-white border border-blush rounded-sm focus:outline-none focus:border-espresso"
-          >
-            {FONT_OPTIONS.map((f) => (
-              <option key={f.value} value={f.value}>
-                {f.label}
-              </option>
-            ))}
-          </select>
+          <VibeDropdown value={fontFamily} onChange={setFontFamily} />
         </div>
 
         <label className="flex items-start gap-3 mt-6 cursor-pointer">
