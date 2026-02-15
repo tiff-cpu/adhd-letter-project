@@ -23,7 +23,7 @@ export default function Home() {
   const [note, setNote] = useState<Note | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [reacted, setReacted] = useState(false);
+  const [reacted, setReacted] = useState<false | "helped" | "not_for_me">(false);
   const [stats, setStats] = useState({ notesRead: 0, helpedRate: 0 });
 
   // History for back/forward navigation
@@ -100,7 +100,7 @@ export default function Home() {
 
   const handleReaction = async (reaction: "helped" | "not_for_me") => {
     if (!note) return;
-    setReacted(true);
+    setReacted(reaction);
     try {
       await fetch("/api/notes/react", {
         method: "POST",
@@ -211,9 +211,13 @@ export default function Home() {
             {/* Thumbs up */}
             <button
               onClick={() => handleReaction("helped")}
-              disabled={reacted}
+              disabled={!!reacted}
               className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                reacted ? "opacity-30" : "text-coffee hover:text-espresso hover:bg-gray-100"
+                reacted === "helped"
+                  ? "text-espresso"
+                  : reacted === "not_for_me"
+                  ? "opacity-20"
+                  : "text-coffee hover:text-espresso hover:bg-gray-100"
               }`}
               aria-label="This helped"
             >
@@ -225,9 +229,13 @@ export default function Home() {
             {/* Thumbs down */}
             <button
               onClick={() => handleReaction("not_for_me")}
-              disabled={reacted}
+              disabled={!!reacted}
               className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                reacted ? "opacity-30" : "text-coffee hover:text-espresso hover:bg-gray-100"
+                reacted === "not_for_me"
+                  ? "text-espresso"
+                  : reacted === "helped"
+                  ? "opacity-20"
+                  : "text-coffee hover:text-espresso hover:bg-gray-100"
               }`}
               aria-label="Not for me"
             >
