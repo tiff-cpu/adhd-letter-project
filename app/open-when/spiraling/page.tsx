@@ -11,7 +11,14 @@ export default function OpenWhenSpiraling() {
   return (
     <div className="flex flex-col items-center px-6 py-12 md:py-20">
       <div className="w-full max-w-2xl">
-        <h1 className="font-body text-lg md:text-xl text-coffee italic mb-10">
+        <Link
+          href="/open-when"
+          className="font-nav text-sm text-coffee hover:text-espresso transition-colors mb-8 inline-block"
+        >
+          &larr; Back to Open When&hellip;
+        </Link>
+
+        <h1 className="font-body text-2xl md:text-3xl text-espresso tracking-wide mb-12">
           Open When You&apos;re Spiraling After Feeling Rejected
         </h1>
 
