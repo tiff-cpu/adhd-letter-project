@@ -9,6 +9,10 @@ export const metadata: Metadata = {
 
 const pages = [
   { slug: "spiraling", title: "Open when your brain won't stop spiraling" },
+  { slug: "feeling-behind", title: "Open when you feel behind" },
+  { slug: "ashamed", title: "Open when shame won't let go" },
+  { slug: "missed-a-deadline", title: "Open when you missed a deadline" },
+  { slug: "ghosted-someone", title: "Open when you ghosted someone" },
 ];
 
 export default function OpenWhenIndex() {
