@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 type Note = {
   id: string;
@@ -26,6 +26,10 @@ export default function Home() {
   const [reacted, setReacted] = useState(false);
   const [stats, setStats] = useState({ notesRead: 0, helpedRate: 0 });
 
+  // History for back/forward navigation
+  const historyRef = useRef<Note[]>([]);
+  const indexRef = useRef(-1);
+
   // Report modal
   const [showReportModal, setShowReportModal] = useState(false);
   const [reportReason, setReportReason] = useState("");
@@ -48,12 +52,34 @@ export default function Home() {
       } else {
         const data = await res.json();
         setNote(data);
+        // Add to history
+        historyRef.current = historyRef.current.slice(0, indexRef.current + 1);
+        historyRef.current.push(data);
+        indexRef.current = historyRef.current.length - 1;
       }
     } catch {
       setError("Couldn't load a note right now. Try again in a moment.");
     }
     setLoading(false);
   }, []);
+
+  const goBack = () => {
+    if (indexRef.current > 0) {
+      indexRef.current -= 1;
+      setNote(historyRef.current[indexRef.current]);
+      setReacted(false);
+    }
+  };
+
+  const goForward = () => {
+    if (indexRef.current < historyRef.current.length - 1) {
+      indexRef.current += 1;
+      setNote(historyRef.current[indexRef.current]);
+      setReacted(false);
+    } else {
+      fetchNote();
+    }
+  };
 
   const fetchStats = async () => {
     try {
@@ -123,6 +149,7 @@ export default function Home() {
   };
 
   const fontClass = note?.font_family ? (FONT_MAP[note.font_family] || "font-hand-permanent-marker") : "font-hand-permanent-marker";
+  const canGoBack = indexRef.current > 0;
 
   return (
     <div className="flex flex-col items-center px-6 py-8 md:py-16">
@@ -131,51 +158,84 @@ export default function Home() {
         This was written by someone whose brain works like yours.
       </p>
 
-      {/* Note Card */}
-      <div className="w-full max-w-2xl mx-auto">
-        {loading ? (
-          <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px] flex items-center justify-center">
-            <p className="font-nav text-sm text-softbrown">Finding a note for you...</p>
-          </div>
-        ) : error ? (
-          <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px] flex items-center justify-center">
-            <p className="font-nav text-sm text-softbrown text-center">{error}</p>
-          </div>
-        ) : note ? (
-          <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px]">
-            <p className={`${fontClass} text-2xl md:text-3xl leading-relaxed text-espresso`}>
-              {note.body}
-            </p>
-          </div>
-        ) : null}
+      {/* Note Card with Nav Arrows */}
+      <div className="w-full max-w-2xl mx-auto flex items-center gap-4">
+        {/* Back arrow */}
+        <button
+          onClick={goBack}
+          disabled={!canGoBack || loading}
+          className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-coffee hover:text-espresso hover:bg-gray-100 transition-colors disabled:opacity-20 disabled:hover:bg-transparent"
+          aria-label="Previous entry"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Card */}
+        <div className="flex-1">
+          {loading ? (
+            <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px] flex items-center justify-center">
+              <p className="font-nav text-sm text-softbrown">Finding a note for you...</p>
+            </div>
+          ) : error ? (
+            <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px] flex items-center justify-center">
+              <p className="font-nav text-sm text-softbrown text-center">{error}</p>
+            </div>
+          ) : note ? (
+            <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px]">
+              <p className={`${fontClass} text-2xl md:text-3xl leading-relaxed text-espresso`}>
+                {note.body}
+              </p>
+            </div>
+          ) : null}
+        </div>
+
+        {/* Forward arrow */}
+        <button
+          onClick={goForward}
+          disabled={loading}
+          className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-coffee hover:text-espresso hover:bg-gray-100 transition-colors disabled:opacity-20 disabled:hover:bg-transparent"
+          aria-label="Next entry"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
 
-      {/* Buttons */}
+      {/* Reaction + Report */}
       {note && !loading && (
-        <div className="mt-8 flex flex-col items-center gap-4">
-          {!reacted ? (
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => handleReaction("helped")}
-                className="font-nav text-sm px-5 py-2.5 rounded-full border border-espresso text-espresso hover:bg-gray-100 transition-colors"
-              >
-                This helped
-              </button>
-              <button
-                onClick={() => handleReaction("not_for_me")}
-                className="font-nav text-sm px-5 py-2.5 rounded-full border border-blush text-softbrown hover:bg-gray-50 transition-colors"
-              >
-                Not for me
-              </button>
-            </div>
-          ) : (
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <div className="flex items-center gap-6">
+            {/* Thumbs up */}
             <button
-              onClick={fetchNote}
-              className="font-nav text-sm px-5 py-2.5 rounded-full border border-espresso text-espresso hover:bg-gray-100 transition-colors"
+              onClick={() => handleReaction("helped")}
+              disabled={reacted}
+              className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
+                reacted ? "opacity-30" : "text-coffee hover:text-espresso hover:bg-gray-100"
+              }`}
+              aria-label="This helped"
             >
-              Read another
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 11v10M4 11H2v10h2M7 11l3-7a2 2 0 012-2h.5a2 2 0 012 2v4h4.5a2 2 0 012 2.1l-1.2 7a2 2 0 01-2 1.9H7" />
+              </svg>
             </button>
-          )}
+
+            {/* Thumbs down */}
+            <button
+              onClick={() => handleReaction("not_for_me")}
+              disabled={reacted}
+              className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
+                reacted ? "opacity-30" : "text-coffee hover:text-espresso hover:bg-gray-100"
+              }`}
+              aria-label="Not for me"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 13V3m3 10h2V3h-2m-3 10l-3 7a2 2 0 01-2 2h-.5a2 2 0 01-2-2v-4H5a2 2 0 01-2-2.1l1.2-7a2 2 0 012-1.9H17" />
+              </svg>
+            </button>
+          </div>
 
           <button
             onClick={() => setShowReportModal(true)}
@@ -236,7 +296,7 @@ export default function Home() {
           href="/resources"
           className="font-nav text-sm text-coffee hover:text-espresso underline transition-colors"
         >
-          ADHD support & resources
+          ADHD support &amp; resources
         </a>
       </div>
 
