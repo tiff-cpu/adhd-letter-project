@@ -13,7 +13,7 @@ export default function Nav() {
           href="/"
           className="font-body text-xl md:text-2xl tracking-widest uppercase text-espresso hover:text-coffee transition-colors"
         >
-          The ADHD Letter Project
+          The ADHD Diary Project
         </Link>
 
         {/* Desktop nav */}

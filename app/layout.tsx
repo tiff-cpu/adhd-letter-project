@@ -4,9 +4,9 @@ import Nav from "@/components/Nav";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "The ADHD Letter Project",
+  title: "The ADHD Diary Project",
   description:
-    "A random note from someone who gets your ADHD brain — so you never have to feel like the only one again.",
+    "A random diary entry from someone whose brain works like yours.",
 };
 
 export default function RootLayout({

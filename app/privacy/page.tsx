@@ -7,7 +7,7 @@ export default function PrivacyPage() {
         </h1>
         <div className="font-body text-sm text-coffee leading-relaxed space-y-4">
           <p>
-            The ADHD Letter Project collects minimal data to operate this site.
+            The ADHD Diary Project collects minimal data to operate this site.
           </p>
           <p>
             <strong>What we collect:</strong> If you submit a note, we store the
