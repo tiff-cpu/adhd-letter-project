@@ -18,7 +18,7 @@ const FONT_OPTIONS = [
 
 export default function WritePage() {
   const [text, setText] = useState("");
-  const [mode, setMode] = useState("");
+  const [mode, setMode] = useState("all");
   const [fontFamily, setFontFamily] = useState("surprise");
   const [agreed, setAgreed] = useState(false);
   const [formState, setFormState] = useState<FormState>("writing");
@@ -31,10 +31,7 @@ export default function WritePage() {
       setFormError("Your entry needs to be at least 50 characters.");
       return;
     }
-    if (!mode) {
-      setFormError("Please pick what kind of day this entry is for.");
-      return;
-    }
+
     if (!agreed) {
       setFormError("Please check the box to confirm you understand.");
       return;
@@ -64,7 +61,7 @@ export default function WritePage() {
 
   const resetForm = () => {
     setText("");
-    setMode("");
+    setMode("all");
     setFontFamily("surprise");
     setAgreed(false);
     setFormState("writing");
@@ -153,14 +150,14 @@ export default function WritePage() {
 
         <div className="mt-6">
           <label className="font-nav text-sm text-coffee block mb-2">
-            What kind of day is this entry for?
+            If this fits a mood, pick one (optional)
           </label>
           <select
             value={mode}
             onChange={(e) => setMode(e.target.value)}
             className="w-full p-3 font-nav text-sm text-espresso bg-white border border-blush rounded-sm focus:outline-none focus:border-espresso"
           >
-            <option value="">Choose one...</option>
+            <option value="all">A little bit of everything</option>
             {MODES.map((m) => (
               <option key={m.value} value={m.value}>
                 {m.label} — {m.description}
