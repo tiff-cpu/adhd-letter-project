@@ -56,6 +56,11 @@ export default function RootLayout({
               Privacy Policy
             </Link>
           </div>
+          <p className="mt-3 font-nav text-xs text-softbrown">
+            Need immediate help?{" "}
+            <a href="tel:988" className="underline hover:text-espresso transition-colors">988</a>
+            {" "}(U.S.)
+          </p>
         </footer>
       </body>
     </html>

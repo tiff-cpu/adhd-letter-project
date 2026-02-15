@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { MODES } from "@/lib/modes";
+import CrisisPopup from "@/components/CrisisPopup";
 
-type FormState = "writing" | "redirect" | "submitting" | "thankyou";
+type FormState = "writing" | "redirect" | "submitting" | "thankyou" | "crisis";
 
 const VIBE_OPTIONS = [
   { value: "surprise", label: "Surprise me", fontClass: "font-nav" },
@@ -24,22 +25,14 @@ function VibeDropdown({
   onChange: (val: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useState<HTMLDivElement | null>(null);
 
   const selected = VIBE_OPTIONS.find((v) => v.value === value) || VIBE_OPTIONS[0];
 
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
-    <div ref={ref} className="relative">
+    <div className="relative" ref={(el) => { ref[1] = null; }} onBlur={(e) => {
+      if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false);
+    }}>
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -115,8 +108,12 @@ export default function WritePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, mode, font_family: fontFamily }),
       });
+
       if (res.ok) {
         setFormState("thankyou");
+      } else if (res.status === 451) {
+        // Crisis content — show crisis popup, preserve draft
+        setFormState("crisis");
       } else if (res.status === 422) {
         setFormState("redirect");
       } else {
@@ -204,6 +201,14 @@ export default function WritePage() {
 
   return (
     <div className="flex flex-col items-center px-6 py-8 md:py-16">
+      {/* Crisis Popup — blocks everything, preserves draft */}
+      {formState === "crisis" && (
+        <CrisisPopup
+          onRewrite={() => setFormState("writing")}
+          onClose={() => setFormState("writing")}
+        />
+      )}
+
       <div className="w-full max-w-lg">
         <p className="font-body text-sm md:text-base text-coffee italic text-center mb-10">
           Write a diary entry.
