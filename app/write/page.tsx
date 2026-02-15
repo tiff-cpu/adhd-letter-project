@@ -206,7 +206,7 @@ export default function WritePage() {
     <div className="flex flex-col items-center px-6 py-8 md:py-16">
       <div className="w-full max-w-lg">
         <p className="font-body text-sm md:text-base text-coffee italic text-center mb-10">
-          Write something you wish someone had said to you on a hard ADHD day.
+          Write a diary entry.
         </p>
 
         <textarea
