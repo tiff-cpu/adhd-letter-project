@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Open When You Ghosted Someone — The ADHD Diary Project",
-  description: "You disappeared. That doesn't make you a bad person.",
+  description: "You didn't disappear because you don't care. You disappeared because your brain hit capacity.",
 };
 
 export default function OpenWhenGhosted() {
@@ -22,8 +22,57 @@ export default function OpenWhenGhosted() {
         </h1>
 
         <div className="font-hand-permanent-marker text-xl md:text-2xl leading-relaxed text-espresso space-y-6">
-          <p>This page is coming soon.</p>
-          <p>In the meantime &mdash; you disappeared. That doesn&apos;t make you a bad person. It makes you someone whose brain ran out of bandwidth.</p>
+          <p>First: you&apos;re not a villain.</p>
+
+          <p>
+            You didn&apos;t disappear because you don&apos;t care.<br />
+            You disappeared because your brain hit capacity and grabbed the nearest exit.
+          </p>
+
+          <p>ADHD doesn&apos;t just forget appointments.</p>
+
+          <p>
+            It forgets to respond.<br />
+            It forgets that time passed.<br />
+            It forgets that &ldquo;I&apos;ll answer later&rdquo; turns into three days&hellip; then three weeks&hellip; then a level of shame that makes you want to throw your phone into the ocean.
+          </p>
+
+          <p>And then the story starts:</p>
+
+          <p>
+            &ldquo;They probably hate me.&rdquo;<br />
+            &ldquo;I&apos;m a terrible friend.&rdquo;<br />
+            &ldquo;I always do this.&rdquo;<br />
+            &ldquo;They&apos;re going to think I don&apos;t care.&rdquo;
+          </p>
+
+          <p>So you avoid it more.</p>
+
+          <p>Because the message isn&apos;t just a message anymore.</p>
+
+          <p>
+            It&apos;s a confession.<br />
+            An apology.<br />
+            A character trial.
+          </p>
+
+          <p>Avoidance is not the same as indifference.</p>
+
+          <p>
+            Sometimes ghosting is overwhelm.<br />
+            Sometimes it&apos;s executive dysfunction.<br />
+            Sometimes it&apos;s shame piling up until the task feels impossible.
+          </p>
+
+          <p>If you&apos;re staring at unread texts like they&apos;re radioactive&mdash;</p>
+
+          <p>I see you.</p>
+
+          <p>You&apos;re not cruel.</p>
+
+          <p>You&apos;re overloaded.</p>
+
+          <p>And you can come back.</p>
         </div>
 
         <hr className="my-12 border-t border-gray-200" />

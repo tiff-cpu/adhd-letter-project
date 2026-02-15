@@ -19,7 +19,7 @@ export default function OpenWhenSpiraling() {
         </Link>
 
         <h1 className="font-body text-2xl md:text-3xl text-espresso tracking-wide mb-12">
-          Open When You&apos;re Spiraling After Feeling Rejected
+          Open When Your Brain Won&apos;t Stop Spiraling
         </h1>
 
         <div className="font-hand-covered-by-your-grace text-xl md:text-2xl leading-relaxed text-espresso space-y-6">
@@ -29,7 +29,7 @@ export default function OpenWhenSpiraling() {
 
           <p>I&apos;m almost certain the text said:</p>
 
-          <p>&ldquo;SE!!!!! IT&apos;S NOT ME. IT&apos;S MY ADHD.&rdquo;</p>
+          <p>&ldquo;IT&apos;S NOT ME. IT&apos;S MY ADHD.&rdquo;</p>
 
           <p>With a link to a video like I had just uncovered classified information.</p>
 
@@ -37,14 +37,20 @@ export default function OpenWhenSpiraling() {
 
           <p>&ldquo;You&apos;re sooo sensitive.&rdquo;</p>
 
-          <p>Over and over again,</p>
+          <p>
+            Drawn out.<br />
+            Exasperated.<br />
+            Repeated.
+          </p>
 
-          <p>And let me tell you &mdash;</p>
+          <p>And let me tell you something &mdash;</p>
 
           <p>
             There is nothing more destabilizing than having your feelings
-            hurt&hellip; and then being told those feelings are wrong.
+            hurt&hellip;
           </p>
+
+          <p>and then being told those feelings are wrong.</p>
 
           <p>Not misunderstood.</p>
 
@@ -89,29 +95,19 @@ export default function OpenWhenSpiraling() {
 
           <p>Your nervous system learned to brace.</p>
 
-          <p>And that makes sense, given what you&apos;ve lived through.</p>
+          <p>And that makes sense.</p>
 
           <p>I see you.</p>
-
-          <p>And you&apos;re not &ldquo;too sensitive.&rdquo;</p>
-
-          <p>You&apos;ve just been carrying impact no one else could see.</p>
         </div>
 
         <hr className="my-12 border-t border-gray-200" />
 
         <div className="flex items-center justify-center gap-6">
-          <Link
-            href="/"
-            className="font-nav text-sm text-coffee hover:text-espresso transition-colors"
-          >
+          <Link href="/" className="font-nav text-sm text-coffee hover:text-espresso transition-colors">
             Read a diary entry
           </Link>
           <span className="text-gray-300">&middot;</span>
-          <Link
-            href="/write"
-            className="font-nav text-sm text-coffee hover:text-espresso transition-colors"
-          >
+          <Link href="/write" className="font-nav text-sm text-coffee hover:text-espresso transition-colors">
             Write your own
           </Link>
         </div>

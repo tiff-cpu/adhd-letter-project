@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Open When You Missed a Deadline — The ADHD Diary Project",
-  description: "The deadline passed. You're still here. That matters more.",
+  description: "Missing a deadline is an event. It is not a personality.",
 };
 
 export default function OpenWhenMissedDeadline() {
@@ -22,8 +22,57 @@ export default function OpenWhenMissedDeadline() {
         </h1>
 
         <div className="font-hand-reenie-beanie text-xl md:text-2xl leading-relaxed text-espresso space-y-6">
-          <p>This page is coming soon.</p>
-          <p>In the meantime &mdash; the deadline passed. You&apos;re still here. That matters more.</p>
+          <p>Take one breath before you read the rest of this.</p>
+
+          <p>You missed it.</p>
+
+          <p>
+            The email wasn&apos;t sent.<br />
+            The form wasn&apos;t submitted.<br />
+            The assignment wasn&apos;t finished.<br />
+            The thing slipped.
+          </p>
+
+          <p>And now your brain is saying:</p>
+
+          <p>
+            &ldquo;This is it.&rdquo;<br />
+            &ldquo;They&apos;re done with me.&rdquo;<br />
+            &ldquo;I always mess things up.&rdquo;<br />
+            &ldquo;I&apos;m so irresponsible.&rdquo;
+          </p>
+
+          <p>Slow down.</p>
+
+          <p>Missing a deadline is an event.</p>
+
+          <p>It is not a personality.</p>
+
+          <p>
+            ADHD brains are time-blind.<br />
+            We underestimate.<br />
+            We avoid.<br />
+            We miscalculate.
+          </p>
+
+          <p>This is not moral failure.</p>
+
+          <p>It&apos;s executive dysfunction colliding with a clock.</p>
+
+          <p>Yes, there may be consequences.</p>
+
+          <p>But consequences are not character verdicts.</p>
+
+          <p>You miscalculated.</p>
+
+          <p>And miscalculations can be repaired.</p>
+
+          <p>
+            Even late.<br />
+            Even embarrassed.
+          </p>
+
+          <p>You are not the mistake.</p>
         </div>
 
         <hr className="my-12 border-t border-gray-200" />
