@@ -192,7 +192,7 @@ export async function POST(request: NextRequest) {
 
   const { error } = await supabaseAdmin
     .from("notes")
-    .insert({ body: sanitized, mode, font_family: resolvedFont, status: "pending" });
+    .insert({ body: sanitized, mode, font_family: resolvedFont, status: "approved" });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
