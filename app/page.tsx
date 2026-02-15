@@ -1,21 +1,23 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 type Note = {
   id: string;
   body: string;
   mode: string;
+  font_family: string;
   created_at: string;
 };
 
-const HAND_FONTS = [
-  "font-hand-1",
-  "font-hand-2",
-  "font-hand-3",
-  "font-hand-4",
-  "font-hand-5",
-];
+const FONT_MAP: Record<string, string> = {
+  "permanent-marker": "font-hand-permanent-marker",
+  "reenie-beanie": "font-hand-reenie-beanie",
+  "nothing-you-could-do": "font-hand-nothing-you-could-do",
+  "covered-by-your-grace": "font-hand-covered-by-your-grace",
+  "allura": "font-hand-allura",
+  "courier-new": "font-hand-courier-new",
+};
 
 export default function Home() {
   const [note, setNote] = useState<Note | null>(null);
@@ -23,7 +25,6 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [reacted, setReacted] = useState(false);
   const [stats, setStats] = useState({ notesRead: 0, helpedRate: 0 });
-  const [fontIndex, setFontIndex] = useState(0);
 
   // Report modal
   const [showReportModal, setShowReportModal] = useState(false);
@@ -34,13 +35,10 @@ export default function Home() {
   const [emailConsent, setEmailConsent] = useState(false);
   const [emailStatus, setEmailStatus] = useState<"idle" | "sent" | "error">("idle");
 
-  const currentFont = useMemo(() => HAND_FONTS[fontIndex % HAND_FONTS.length], [fontIndex]);
-
   const fetchNote = useCallback(async () => {
     setLoading(true);
     setError(null);
     setReacted(false);
-    setFontIndex(Math.floor(Math.random() * HAND_FONTS.length));
     try {
       const res = await fetch(`/api/notes/random`);
       if (!res.ok) {
@@ -124,6 +122,8 @@ export default function Home() {
     }
   };
 
+  const fontClass = note?.font_family ? (FONT_MAP[note.font_family] || "font-hand-permanent-marker") : "font-hand-permanent-marker";
+
   return (
     <div className="flex flex-col items-center px-6 py-8 md:py-16">
       {/* Subheader */}
@@ -131,7 +131,7 @@ export default function Home() {
         This was written by someone whose brain works like yours.
       </p>
 
-      {/* Note Card — wider */}
+      {/* Note Card */}
       <div className="w-full max-w-2xl mx-auto">
         {loading ? (
           <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px] flex items-center justify-center">
@@ -143,7 +143,7 @@ export default function Home() {
           </div>
         ) : note ? (
           <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px]">
-            <p className={`${currentFont} text-2xl md:text-3xl leading-relaxed text-espresso`}>
+            <p className={`${fontClass} text-2xl md:text-3xl leading-relaxed text-espresso`}>
               {note.body}
             </p>
           </div>

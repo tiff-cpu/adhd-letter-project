@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
 
   let query = supabaseAdmin
     .from("notes")
-    .select("id, body, mode, created_at")
+    .select("id, body, mode, font_family, created_at")
     .eq("status", "approved");
 
   if (mode && mode !== "all") {
