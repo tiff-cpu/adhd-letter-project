@@ -1,7 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 export default function AboutPage() {
   return (
     <div className="flex flex-col items-center px-6 py-8 md:py-16">
       <div className="w-full max-w-lg">
+        <img
+          src="/tiff.jpg"
+          alt="Tiff"
+          className="w-32 h-32 rounded-full object-cover object-top mx-auto mb-8"
+        />
         <div className="font-body text-base text-espresso leading-relaxed space-y-5">
           <p className="text-lg font-semibold">I&apos;m Tiff.</p>
 
