@@ -183,8 +183,8 @@ export default function Home() {
               <p className="font-nav text-sm text-softbrown text-center">{error}</p>
             </div>
           ) : note ? (
-            <div className="note-card relative rounded-sm p-10 md:p-14 min-h-[280px]">
-              <p className={`${fontClass} text-2xl md:text-3xl leading-relaxed text-espresso`}>
+            <div className="note-card relative rounded-sm p-6 md:p-14 min-h-[200px] md:min-h-[280px]">
+              <p className={`${fontClass} text-lg md:text-3xl leading-relaxed text-espresso`}>
                 {note.body}
               </p>
             </div>
