@@ -25,6 +25,12 @@ export default function Nav() {
             Write an Entry
           </Link>
           <Link
+            href="/open-when"
+            className="font-nav text-sm tracking-wide text-coffee hover:text-espresso transition-colors"
+          >
+            Open When&hellip;
+          </Link>
+          <Link
             href="/about"
             className="font-nav text-sm tracking-wide text-coffee hover:text-espresso transition-colors"
           >
@@ -82,6 +88,13 @@ export default function Nav() {
             className="font-nav text-sm text-coffee hover:text-espresso transition-colors"
           >
             Write an Entry
+          </Link>
+          <Link
+            href="/open-when"
+            onClick={() => setOpen(false)}
+            className="font-nav text-sm text-coffee hover:text-espresso transition-colors"
+          >
+            Open When&hellip;
           </Link>
           <Link
             href="/about"

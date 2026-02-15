@@ -279,6 +279,19 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      {/* Coming Soon */}
+      <div className="mt-16 text-center">
+        <p className="font-nav text-xs uppercase tracking-widest text-softbrown mb-4">
+          Coming Soon
+        </p>
+        <div className="font-nav text-sm text-coffee space-y-2">
+          <p>Community replies</p>
+          <p>Save entries that resonate</p>
+          <p>More Open When pages</p>
+          <p>A small library of tools that actually help</p>
+        </div>
+      </div>
     </div>
   );
 }
