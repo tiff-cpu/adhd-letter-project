@@ -1,6 +1,4 @@
 export default function AboutPage() {
-  const clarityCallUrl = process.env.NEXT_PUBLIC_CLARITY_CALL_URL || "#";
-
   return (
     <div className="flex flex-col items-center px-6 py-8 md:py-16">
       <div className="w-full max-w-lg">
@@ -30,7 +28,7 @@ export default function AboutPage() {
           <p>
             That&apos;s why this exists. Not as therapy. Not as advice. Just a
             place where someone with a brain like yours left something real for
-            you to find — so you don&apos;t have to feel like the only one
+            you to find &mdash; so you don&apos;t have to feel like the only one
             anymore.
           </p>
 
@@ -39,22 +37,24 @@ export default function AboutPage() {
           <p>
             If you want to talk to a real human who gets it,{" "}
             <a
-              href={clarityCallUrl}
-              className="text-amber hover:text-espresso underline"
+              href="https://calendly.com/tiff-tiffadhddentist/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-coffee hover:text-espresso underline"
             >
               book a clarity call
             </a>
             . If you want to keep up with what I&apos;m building,{" "}
             <a
-              href="#"
-              className="text-amber hover:text-espresso underline"
+              href="/"
+              className="text-coffee hover:text-espresso underline"
             >
               join the list
             </a>
             . No pressure, no spam.
           </p>
 
-          <p>— Tiff</p>
+          <p>&mdash; Tiff</p>
 
           <p className="text-xs text-softbrown italic mt-8">
             This site is not therapy, medical advice, or crisis support.

@@ -37,7 +37,7 @@ export default function ResourcesPage() {
             <p className="font-nav text-xs text-coffee">Call or text 988 — free, confidential, 24/7</p>
           </a>
           <div className="pt-4 mt-4 border-t border-blush">
-            <a href={process.env.NEXT_PUBLIC_CLARITY_CALL_URL || "#"} target="_blank" rel="noopener noreferrer" className="block">
+            <a href="https://calendly.com/tiff-tiffadhddentist/30min" target="_blank" rel="noopener noreferrer" className="block">
               <p className="font-nav text-sm text-espresso font-medium">Talk to Someone Who Gets It</p>
               <p className="font-nav text-xs text-coffee">Book a clarity call with Tiff — not therapy, just a real conversation</p>
             </a>
