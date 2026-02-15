@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get the actual note bodies for each report
-    const noteIds = [...new Set(reports?.map((r) => r.note_id) || [])];
+    const noteIds = Array.from(new Set(reports?.map((r) => r.note_id) || []));
     const { data: notes } = await supabaseAdmin
       .from("notes")
       .select("id, body, mode")
