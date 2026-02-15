@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #faf6f1;
+  color: #5c4a32;
+}
+
+/* Note card paper texture effect */
+.note-card {
+  background: linear-gradient(135deg, #fffdf9 0%, #f5ede3 100%);
+  box-shadow: 0 1px 3px rgba(139, 115, 85, 0.12),
+    0 4px 12px rgba(139, 115, 85, 0.08);
+  border: 1px solid rgba(232, 213, 196, 0.6);
+}
+
+/* Subtle tape effect at top of note */
+.note-card::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 80px;
+  height: 24px;
+  background: rgba(232, 213, 196, 0.7);
+  border-radius: 2px;
+}
