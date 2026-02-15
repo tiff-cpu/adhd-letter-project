@@ -25,14 +25,19 @@ export default function OpenWhenIndex() {
         Start with the one that feels closest to your chest right now.
       </p>
 
-      <div className="mt-12 flex flex-col gap-6 w-full max-w-md">
+      <div className="mt-12 flex flex-col gap-3 w-full max-w-md">
         {pages.map((page) => (
           <Link
             key={page.slug}
             href={`/open-when/${page.slug}`}
-            className="font-body text-base text-espresso hover:text-coffee transition-colors"
+            className="group flex items-center justify-between w-full px-5 py-4 rounded-sm border border-gray-200 hover:border-espresso hover:bg-gray-50 transition-all"
           >
-            {page.title}
+            <span className="font-body text-base text-espresso">
+              {page.title}
+            </span>
+            <span className="text-coffee group-hover:text-espresso group-hover:translate-x-1 transition-all">
+              &rarr;
+            </span>
           </Link>
         ))}
       </div>
