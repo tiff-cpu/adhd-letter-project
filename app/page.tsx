@@ -349,15 +349,39 @@ export default function Home() {
       </div>
 
       {/* Coming Soon */}
-      <div className="mt-16 text-center">
-        <p className="font-nav text-xs uppercase tracking-widest text-softbrown mb-4">
+      <div className="mt-16 w-full max-w-2xl mx-auto">
+        <p className="font-nav text-xs uppercase tracking-widest text-softbrown mb-8 text-center">
           Coming Soon
         </p>
-        <div className="font-nav text-sm text-coffee space-y-2">
-          <p>Community replies</p>
-          <p>Save entries that resonate</p>
-          <p>More Open When pages</p>
-          <p>A small library of tools that actually help</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="border border-gray-200 rounded-sm p-5 text-center">
+            <svg className="w-6 h-6 text-coffee mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+            </svg>
+            <p className="font-nav text-sm text-espresso font-medium">Replies</p>
+            <p className="font-nav text-xs text-coffee mt-1">Respond to entries that move you</p>
+          </div>
+          <div className="border border-gray-200 rounded-sm p-5 text-center">
+            <svg className="w-6 h-6 text-coffee mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+            </svg>
+            <p className="font-nav text-sm text-espresso font-medium">Saved Entries</p>
+            <p className="font-nav text-xs text-coffee mt-1">Keep the ones that resonate</p>
+          </div>
+          <div className="border border-gray-200 rounded-sm p-5 text-center">
+            <svg className="w-6 h-6 text-coffee mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+            <p className="font-nav text-sm text-espresso font-medium">Open When</p>
+            <p className="font-nav text-xs text-coffee mt-1">More pages for hard moments</p>
+          </div>
+          <div className="border border-gray-200 rounded-sm p-5 text-center">
+            <svg className="w-6 h-6 text-coffee mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.1-5.1m0 0L12 4.37m-5.68 5.7h15.08" />
+            </svg>
+            <p className="font-nav text-sm text-espresso font-medium">Tools</p>
+            <p className="font-nav text-xs text-coffee mt-1">A small library that actually helps</p>
+          </div>
         </div>
       </div>
     </div>
