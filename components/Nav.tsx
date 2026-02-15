@@ -7,11 +7,11 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="w-full py-6 px-6 md:px-12">
+    <nav className="w-full py-8 px-6 md:px-12">
       <div className="flex items-center justify-between">
         <Link
           href="/"
-          className="font-nav text-lg tracking-wide text-espresso hover:text-coffee transition-colors"
+          className="font-body text-xl md:text-2xl tracking-widest uppercase text-espresso hover:text-coffee transition-colors"
         >
           The ADHD Letter Project
         </Link>

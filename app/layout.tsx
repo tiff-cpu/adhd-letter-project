@@ -24,7 +24,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Covered+By+Your+Grace&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nothing+You+Could+Do&family=Outfit:wght@300;400;500;600&family=Over+the+Rainbow&family=Permanent+Marker&family=Reenie+Beanie&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -39,19 +39,19 @@ export default function RootLayout({
           <div className="mt-3 flex items-center justify-center gap-6">
             <Link
               href="/about"
-              className="font-nav text-xs text-softbrown hover:text-coffee transition-colors"
+              className="font-nav text-xs text-softbrown hover:text-espresso transition-colors"
             >
               About
             </Link>
             <Link
               href="/resources"
-              className="font-nav text-xs text-softbrown hover:text-coffee transition-colors"
+              className="font-nav text-xs text-softbrown hover:text-espresso transition-colors"
             >
               Resources
             </Link>
             <Link
               href="/privacy"
-              className="font-nav text-xs text-softbrown hover:text-coffee transition-colors"
+              className="font-nav text-xs text-softbrown hover:text-espresso transition-colors"
             >
               Privacy Policy
             </Link>
