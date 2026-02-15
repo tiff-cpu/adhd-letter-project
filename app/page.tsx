@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { MODES } from "@/lib/modes";
-
 type Note = {
   id: string;
   body: string;
@@ -15,7 +13,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [reacted, setReacted] = useState(false);
-  const [selectedMode, setSelectedMode] = useState("all");
   const [stats, setStats] = useState({ notesRead: 0, helpedRate: 0 });
 
   // Report modal
@@ -34,8 +31,7 @@ export default function Home() {
     setError(null);
     setReacted(false);
     try {
-      const modeParam = selectedMode !== "all" ? `?mode=${selectedMode}` : "";
-      const res = await fetch(`/api/notes/random${modeParam}`);
+      const res = await fetch(`/api/notes/random`);
       if (!res.ok) {
         const data = await res.json();
         setError(data.error || "Something went wrong.");
@@ -48,7 +44,7 @@ export default function Home() {
       setError("Couldn't load a note right now. Try again in a moment.");
     }
     setLoading(false);
-  }, [selectedMode]);
+  }, []);
 
   const fetchStats = async () => {
     try {
@@ -123,22 +119,6 @@ export default function Home() {
       <p className="font-body text-sm md:text-base text-coffee italic text-center max-w-md mb-10 md:mb-14">
         This was written by someone whose brain works like yours.
       </p>
-
-      {/* Mode dropdown - visible, optional */}
-      <div className="mb-6 w-full max-w-lg">
-        <select
-          value={selectedMode}
-          onChange={(e) => setSelectedMode(e.target.value)}
-          className="w-full p-3 font-nav text-sm text-espresso bg-warmwhite border border-blush rounded-sm focus:outline-none focus:border-amber"
-        >
-          <option value="all">All moods</option>
-          {MODES.map((mode) => (
-            <option key={mode.value} value={mode.value}>
-              {mode.label} — {mode.description}
-            </option>
-          ))}
-        </select>
-      </div>
 
       {/* Note Card */}
       <div className="w-full max-w-lg mx-auto">
@@ -238,20 +218,13 @@ export default function Home() {
           )}
         </p>
       )}
-
-      {/* Coaching CTA */}
-      <div className="mt-16 w-full max-w-lg text-center">
-        <p className="font-body text-sm text-coffee leading-relaxed mb-4">
-          If you&apos;re tired of feeling like the only one whose brain works this way,
-          you don&apos;t have to figure it out alone. Talk to someone who gets it.
-        </p>
+      {/* Resources link */}
+      <div className="mt-12 text-center">
         <a
-          href={clarityCallUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block font-nav text-sm px-6 py-2.5 rounded-full bg-espresso text-cream hover:bg-coffee transition-colors"
+          href="/resources"
+          className="font-nav text-sm text-coffee hover:text-espresso underline transition-colors"
         >
-          Book a Clarity Call
+          ADHD support & resources
         </a>
       </div>
 
