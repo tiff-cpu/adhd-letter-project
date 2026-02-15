@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { MODES } from "@/lib/modes";
 import CrisisPopup from "@/components/CrisisPopup";
@@ -25,14 +25,22 @@ function VibeDropdown({
   onChange: (val: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const ref = useState<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const selected = VIBE_OPTIONS.find((v) => v.value === value) || VIBE_OPTIONS[0];
 
   return (
-    <div className="relative" ref={(el) => { ref[1] = null; }} onBlur={(e) => {
-      if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false);
-    }}>
+    <div ref={ref} className="relative">
       <button
         type="button"
         onClick={() => setOpen(!open)}
