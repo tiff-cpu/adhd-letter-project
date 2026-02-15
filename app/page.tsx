@@ -301,7 +301,7 @@ export default function Home() {
       </div>
 
       {/* Email Signup */}
-      <div className="mt-10 w-full max-w-lg">
+      <div id="signup" className="mt-10 w-full max-w-lg">
         {emailStatus === "sent" ? (
           <p className="font-nav text-sm text-coffee text-center">
             You&apos;re on the list. No spam, ever.

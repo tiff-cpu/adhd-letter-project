@@ -46,7 +46,7 @@ export default function AboutPage() {
             </a>
             . If you want to keep up with what I&apos;m building,{" "}
             <a
-              href="/"
+              href="/#signup"
               className="text-coffee hover:text-espresso underline"
             >
               join the list
