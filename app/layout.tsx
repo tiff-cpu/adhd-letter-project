@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -62,6 +63,7 @@ export default function RootLayout({
             {" "}(U.S.)
           </p>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
