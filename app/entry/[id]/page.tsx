@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import ShareButton from "@/components/ShareButton";
 
 const FONT_MAP: Record<string, string> = {
   "permanent-marker": "font-hand-permanent-marker",
@@ -92,6 +93,10 @@ export default async function EntryPage({
             {data.body}
           </p>
         </div>
+      </div>
+
+      <div className="mt-6 flex flex-col items-center gap-3">
+        <ShareButton entryId={data.id} />
       </div>
 
       <Link

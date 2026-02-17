@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import ShareButton from "@/components/ShareButton";
 
 type Note = {
   id: string;
@@ -245,12 +246,16 @@ export default function Home() {
             </button>
           </div>
 
-          <button
-            onClick={() => setShowReportModal(true)}
-            className="font-nav text-xs text-softbrown hover:text-espresso transition-colors"
-          >
-            Report this note
-          </button>
+          <div className="flex items-center gap-4">
+            <ShareButton entryId={note.id} />
+            <span className="text-softbrown">·</span>
+            <button
+              onClick={() => setShowReportModal(true)}
+              className="font-nav text-xs text-softbrown hover:text-espresso transition-colors"
+            >
+              Report this note
+            </button>
+          </div>
         </div>
       )}
 
