@@ -8,6 +8,26 @@ export const metadata: Metadata = {
   title: "The ADHD Diary Project",
   description:
     "A random diary entry from someone whose brain works like yours.",
+  openGraph: {
+    title: "The ADHD Diary Project",
+    description: "A random diary entry from someone whose brain works like yours.",
+    siteName: "The ADHD Diary Project",
+    type: "website",
+    images: [
+      {
+        url: "https://adhddiaryproject.com/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "the adhd diary project",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The ADHD Diary Project",
+    description: "A random diary entry from someone whose brain works like yours.",
+    images: ["https://adhddiaryproject.com/og-default.png"],
+  },
 };
 
 export default function RootLayout({

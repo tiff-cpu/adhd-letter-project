@@ -12,9 +12,48 @@ const FONT_MAP: Record<string, string> = {
   "courier-new": "font-hand-courier-new",
 };
 
-export const metadata: Metadata = {
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const { data } = await supabaseAdmin
+    .from("notes")
+    .select("body")
+    .eq("id", params.id)
+    .eq("status", "approved")
+    .single();
+
+  const snippet = data
+    ? data.body.length > 140
+      ? data.body.slice(0, 140) + "…"
+      : data.body
+    : "A random diary entry from someone whose brain works like yours.";
+
+  return {
+    robots: { index: false, follow: false },
+    openGraph: {
+      title: "The ADHD Diary Project",
+      description: snippet,
+      siteName: "The ADHD Diary Project",
+      type: "article",
+      images: [
+        {
+          url: "https://adhddiaryproject.com/og-default.png",
+          width: 1200,
+          height: 630,
+          alt: "the adhd diary project",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "The ADHD Diary Project",
+      description: snippet,
+      images: ["https://adhddiaryproject.com/og-default.png"],
+    },
+  };
+}
 
 export default async function EntryPage({
   params,
