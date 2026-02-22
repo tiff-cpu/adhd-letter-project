@@ -42,6 +42,12 @@ export default function Nav() {
           >
             Resources
           </Link>
+          <Link
+            href="/downloads"
+            className="font-nav text-sm tracking-wide text-coffee hover:text-espresso transition-colors"
+          >
+            The ADHD Lab
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -109,6 +115,13 @@ export default function Nav() {
             className="font-nav text-sm text-coffee hover:text-espresso transition-colors"
           >
             Resources
+          </Link>
+          <Link
+            href="/downloads"
+            onClick={() => setOpen(false)}
+            className="font-nav text-sm text-coffee hover:text-espresso transition-colors"
+          >
+            The ADHD Lab
           </Link>
         </div>
       )}

@@ -45,7 +45,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Allura&family=Caveat:wght@400;500;600;700&family=Covered+By+Your+Grace&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nothing+You+Could+Do&family=Outfit:wght@300;400;500;600&family=Permanent+Marker&family=Reenie+Beanie&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Allura&family=Caveat:wght@400;500;600;700&family=Covered+By+Your+Grace&family=Lato:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nothing+You+Could+Do&family=Outfit:wght@300;400;500;600&family=Permanent+Marker&family=Reenie+Beanie&display=swap"
           rel="stylesheet"
         />
       </head>

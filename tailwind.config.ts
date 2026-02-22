@@ -20,6 +20,7 @@ module.exports = {
         hand: ["Caveat", "cursive"],
         body: ["Lora", "serif"],
         nav: ["Outfit", "sans-serif"],
+        lab: ["Lato", "sans-serif"],
         "hand-permanent-marker": ['"Permanent Marker"', "cursive"],
         "hand-reenie-beanie": ['"Reenie Beanie"', "cursive"],
         "hand-nothing-you-could-do": ['"Nothing You Could Do"', "cursive"],
