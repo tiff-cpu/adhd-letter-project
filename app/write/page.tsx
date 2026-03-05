@@ -7,6 +7,25 @@ import CrisisPopup from "@/components/CrisisPopup";
 
 type FormState = "writing" | "redirect" | "submitting" | "thankyou" | "crisis";
 
+const PROMPTS = [
+  "The hardest part about having ADHD is...",
+  "I really hate myself today because...",
+  "I\u2019m so tired of pretending that...",
+  "Why can\u2019t I just...",
+  "Nobody knows that I...",
+  "I just want someone to understand that...",
+  "The loneliest part about having ADHD is...",
+  "I know I\u2019m smart enough. But...",
+  "I had a plan today. And then...",
+  "The thing about burnout nobody talks about is...",
+  "I don\u2019t know how much longer I can keep...",
+  "Sometimes I wonder what my life would look like if I\u2019d been diagnosed sooner because...",
+  "I hurt someone today and I didn\u2019t mean to. What happened was...",
+  "The hardest thing to explain to someone who doesn\u2019t have ADHD is...",
+  "It\u2019s 2am and I can\u2019t stop thinking about...",
+  "I don\u2019t know what I need right now, but...",
+];
+
 const VIBE_OPTIONS = [
   { value: "surprise", label: "Surprise me", fontClass: "font-nav" },
   { value: "permanent-marker", label: "Bold", fontClass: "font-hand-permanent-marker" },
@@ -92,6 +111,42 @@ export default function WritePage() {
   const [agreed, setAgreed] = useState(false);
   const [formState, setFormState] = useState<FormState>("writing");
   const [formError, setFormError] = useState<string | null>(null);
+  const [usedPrompts, setUsedPrompts] = useState<number[]>([]);
+  const [activePrompt, setActivePrompt] = useState<string | null>(null);
+
+  const getRandomPrompt = () => {
+    // First tap always shows the first prompt
+    if (activePrompt === null) {
+      const newPrompt = PROMPTS[0];
+      setText(newPrompt);
+      setActivePrompt(newPrompt);
+      setUsedPrompts([0]);
+      return;
+    }
+
+    let available = PROMPTS.map((_, i) => i).filter((i) => !usedPrompts.includes(i));
+    if (available.length === 0) {
+      const currentIndex = activePrompt ? PROMPTS.indexOf(activePrompt) : -1;
+      available = PROMPTS.map((_, i) => i).filter((i) => i !== currentIndex);
+      setUsedPrompts([]);
+    }
+    const randomIndex = available[Math.floor(Math.random() * available.length)];
+    const newPrompt = PROMPTS[randomIndex];
+
+    // If they haven't typed anything beyond a previous prompt, replace with new prompt
+    if (!text || (activePrompt && text === activePrompt)) {
+      setText(newPrompt);
+    } else if (activePrompt && text.startsWith(activePrompt)) {
+      // They started writing after the prompt — swap just the prompt part
+      setText(newPrompt + text.slice(activePrompt.length));
+    } else {
+      // They've been writing freely — prepend the prompt
+      setText(newPrompt + " " + text);
+    }
+
+    setActivePrompt(newPrompt);
+    setUsedPrompts((prev) => [...prev, randomIndex]);
+  };
 
   const selectedVibe = VIBE_OPTIONS.find((v) => v.value === fontFamily) || VIBE_OPTIONS[0];
   const textareaFontClass = fontFamily === "surprise" ? "font-hand" : selectedVibe.fontClass;
@@ -142,6 +197,8 @@ export default function WritePage() {
     setAgreed(false);
     setFormState("writing");
     setFormError(null);
+    setUsedPrompts([]);
+    setActivePrompt(null);
   };
 
   if (formState === "thankyou") {
@@ -228,9 +285,18 @@ export default function WritePage() {
           placeholder="Start writing..."
           className={`w-full min-h-[180px] p-5 ${textareaFontClass} text-xl text-espresso bg-white border border-blush rounded-sm resize-none focus:outline-none focus:border-espresso placeholder:text-softbrown`}
         />
-        <p className="font-nav text-xs text-softbrown mt-1.5 text-right">
-          {text.length} / 50 minimum
-        </p>
+        <div className="flex items-center justify-between mt-1.5">
+          <button
+            type="button"
+            onClick={getRandomPrompt}
+            className="font-nav text-xs text-softbrown hover:text-espresso transition-colors underline"
+          >
+            {activePrompt === null ? "Need a starting point?" : "Try a different prompt"}
+          </button>
+          <p className="font-nav text-xs text-softbrown">
+            {text.length} / 50 minimum
+          </p>
+        </div>
 
         <div className="mt-6">
           <label className="font-nav text-sm text-coffee block mb-2">
