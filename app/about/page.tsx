@@ -1,4 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Tiff | The ADHD Diary Project",
+  description:
+    "I'm a dentist who burned out after 15 years. I have ADHD. I built this because I needed it to exist.",
+};
+
 export default function AboutPage() {
   return (
     <div className="flex flex-col items-center px-6 py-8 md:py-16">

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
+import JsonLd from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "The ADHD Diary Project",
+  title: "The ADHD Diary Project | You're Not the Only One",
   description:
-    "A random diary entry from someone whose brain works like yours.",
+    "Read anonymous diary entries from adults with ADHD, or write your own. Free guides, Open When letters, and a space to say the things you've never said out loud.",
   openGraph: {
-    title: "The ADHD Diary Project",
-    description: "A random diary entry from someone whose brain works like yours.",
+    title: "The ADHD Diary Project | You're Not the Only One",
+    description: "Read anonymous diary entries from adults with ADHD, or write your own. Free guides, Open When letters, and a space to say the things you've never said out loud.",
     siteName: "The ADHD Diary Project",
     type: "website",
     images: [
@@ -24,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The ADHD Diary Project",
-    description: "A random diary entry from someone whose brain works like yours.",
+    title: "The ADHD Diary Project | You're Not the Only One",
+    description: "Read anonymous diary entries from adults with ADHD, or write your own. Free guides, Open When letters, and a space to say the things you've never said out loud.",
     images: ["https://adhddiaryproject.com/og-default.png"],
   },
 };
@@ -50,6 +51,26 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body min-h-screen flex flex-col">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "The ADHD Diary Project",
+            url: "https://adhddiaryproject.com",
+            description:
+              "A free, anonymous space where adults with ADHD can write diary entries, read others, and download guides.",
+          }}
+        />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "The ADHD Diary Project",
+            url: "https://adhddiaryproject.com",
+            logo: "https://adhddiaryproject.com/og-default.png",
+            sameAs: ["https://www.instagram.com/tifftheadhdartist/"],
+          }}
+        />
         <Nav />
         <main className="flex-1">{children}</main>
         <footer className="w-full py-8 px-6 md:px-12 text-center">

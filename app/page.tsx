@@ -154,7 +154,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center px-6 py-8 md:py-16">
-      {/* Subheader */}
+      {/* H1 + Subheader */}
+      <h1 className="font-body text-2xl md:text-3xl text-espresso tracking-wide text-center mb-3">
+        The ADHD Diary Project
+      </h1>
       <p className="font-body text-sm md:text-base text-coffee italic text-center max-w-md mb-10 md:mb-14">
         This was written by someone whose brain works like yours.
       </p>

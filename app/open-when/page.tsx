@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Open When… — The ADHD Diary Project",
@@ -17,6 +18,27 @@ const pages = [
 
 export default function OpenWhenIndex() {
   return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://adhddiaryproject.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Open When",
+              item: "https://adhddiaryproject.com/open-when",
+            },
+          ],
+        }}
+      />
     <div className="flex flex-col items-center px-6 py-12 md:py-20">
       <h1 className="font-body text-2xl md:text-3xl text-espresso tracking-wide">
         Open When&hellip;
@@ -42,5 +64,6 @@ export default function OpenWhenIndex() {
         ))}
       </div>
     </div>
+    </>
   );
 }

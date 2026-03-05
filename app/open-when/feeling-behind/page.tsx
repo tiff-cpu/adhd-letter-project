@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Open When You Feel Behind — The ADHD Diary Project",
@@ -8,6 +9,33 @@ export const metadata: Metadata = {
 
 export default function OpenWhenFeelingBehind() {
   return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: "Open When You Feel Behind",
+          description: "You are not behind. You are on a nonlinear path. And nonlinear does not mean wrong.",
+          url: "https://adhddiaryproject.com/open-when/feeling-behind",
+          mainEntityOfPage: "https://adhddiaryproject.com/open-when/feeling-behind",
+          publisher: {
+            "@type": "Organization",
+            name: "The ADHD Diary Project",
+            url: "https://adhddiaryproject.com",
+          },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://adhddiaryproject.com" },
+            { "@type": "ListItem", position: 2, name: "Open When", item: "https://adhddiaryproject.com/open-when" },
+            { "@type": "ListItem", position: 3, name: "Feeling Behind", item: "https://adhddiaryproject.com/open-when/feeling-behind" },
+          ],
+        }}
+      />
     <div className="flex flex-col items-center px-6 py-12 md:py-20">
       <div className="w-full max-w-2xl">
         <Link
@@ -79,5 +107,6 @@ export default function OpenWhenFeelingBehind() {
         </div>
       </div>
     </div>
+    </>
   );
 }

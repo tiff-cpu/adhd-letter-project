@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Open When You're Spiraling After Feeling Rejected — The ADHD Diary Project",
@@ -9,6 +10,33 @@ export const metadata: Metadata = {
 
 export default function OpenWhenSpiraling() {
   return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: "Open When Your Brain Won't Stop Spiraling",
+          description: "You're not too sensitive. You've just been carrying impact no one else could see.",
+          url: "https://adhddiaryproject.com/open-when/spiraling",
+          mainEntityOfPage: "https://adhddiaryproject.com/open-when/spiraling",
+          publisher: {
+            "@type": "Organization",
+            name: "The ADHD Diary Project",
+            url: "https://adhddiaryproject.com",
+          },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://adhddiaryproject.com" },
+            { "@type": "ListItem", position: 2, name: "Open When", item: "https://adhddiaryproject.com/open-when" },
+            { "@type": "ListItem", position: 3, name: "Spiraling", item: "https://adhddiaryproject.com/open-when/spiraling" },
+          ],
+        }}
+      />
     <div className="flex flex-col items-center px-6 py-12 md:py-20">
       <div className="w-full max-w-2xl">
         <Link
@@ -113,5 +141,6 @@ export default function OpenWhenSpiraling() {
         </div>
       </div>
     </div>
+    </>
   );
 }
