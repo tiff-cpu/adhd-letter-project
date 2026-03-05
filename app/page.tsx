@@ -316,6 +316,59 @@ export default function Home() {
         </a>
       </div>
 
+      {/* What is this */}
+      <div className="mt-16 w-full max-w-2xl mx-auto text-center">
+        <h2 className="font-body text-lg md:text-xl text-espresso mb-6">
+          This is what ADHD actually feels like.
+        </h2>
+        <div className="font-body text-sm md:text-base text-coffee leading-relaxed max-w-lg mx-auto space-y-5">
+          <p>
+            The ADHD Diary Project is a growing collection of anonymous diary entries
+            written by adults with ADHD.
+          </p>
+          <p>
+            The burnout. The shame spirals. The masking. The late-night spiraling. It&apos;s all here.
+          </p>
+          <div className="space-y-1">
+            <p>Real thoughts.</p>
+            <p>Real moments.</p>
+            <p>The things we usually keep to ourselves.</p>
+          </div>
+          <div className="space-y-1">
+            <p>No accounts.</p>
+            <p>No algorithms.</p>
+            <p>No advice.</p>
+          </div>
+          <p>
+            Just people telling the truth about how their brains work.
+          </p>
+          <p>
+            Read a diary entry below &mdash; or add your own to the collection.
+          </p>
+          <div className="flex justify-center gap-4 mt-2">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="font-nav text-sm px-5 py-2 rounded-full border border-espresso text-espresso hover:bg-gray-100 transition-colors"
+            >
+              Read an entry
+            </a>
+            <a
+              href="/write"
+              className="font-nav text-sm px-5 py-2 rounded-full border border-espresso text-espresso hover:bg-gray-100 transition-colors"
+            >
+              Write an entry
+            </a>
+          </div>
+          <p className="text-sm text-softbrown italic mt-4">
+            Explore{" "}
+            <a href="/open-when" className="underline hover:text-espresso transition-colors">Open When letters</a>{" "}
+            for the hard moments, or grab a free{" "}
+            <a href="/downloads" className="underline hover:text-espresso transition-colors">ADHD guide</a>.
+          </p>
+        </div>
+      </div>
+
       {/* Email Signup */}
       <div id="signup" className="mt-10 w-full max-w-lg">
         {emailStatus === "sent" ? (
